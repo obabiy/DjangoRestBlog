@@ -19,7 +19,7 @@
           <div class="card-body">
             <h5 class="card-title"> {{post.title}} </h5>
             <p class="card-text">{{post.body|truncatewords:15}}</p>  <!-- контейнер буде містити перші 15 символів -->
-            <a href="#" class="btn btn-light">Read</a>
+            <a href="{{ post.get_absolute_url }}" class="btn btn-light">Read</a>  <!-- Викликаємо метод моделі пост, який вертає url для кожного посту -->
           </div>
         </div>
 
