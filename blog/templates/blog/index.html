@@ -10,18 +10,20 @@
     <h1 class="mb-5"> Posts: </h1>
     {% for post in posts %}
 
-        <div class="card mb-5">
+<!--        <div class="card mb-5">-->
 
-          <div class="card-header">
-            {{post.date_pub}}
-          </div>
+<!--          <div class="card-header">-->
+<!--            {{post.date_pub}}-->
+<!--          </div>-->
 
-          <div class="card-body">
-            <h5 class="card-title"> {{post.title}} </h5>
-            <p class="card-text">{{post.body|truncatewords:15}}</p>  <!-- контейнер буде містити перші 15 символів -->
-            <a href="{{ post.get_absolute_url }}" class="btn btn-light">Read</a>  <!-- Викликаємо метод моделі пост, який вертає url для кожного посту -->
-          </div>
-        </div>
+<!--          <div class="card-body">-->
+<!--            <h5 class="card-title"> {{post.title}} </h5>-->
+<!--            <p class="card-text">{{post.body|truncatewords:15}}</p>  &lt;!&ndash; контейнер буде містити перші 15 символів &ndash;&gt;-->
+<!--            <a href="{{ post.get_absolute_url }}" class="btn btn-light">Read</a>  &lt;!&ndash; Викликаємо метод моделі пост, який вертає url для кожного посту &ndash;&gt;-->
+<!--          </div>-->
+<!--        </div>-->
+
+        {% include 'blog/includes/post_card_template.html' %}
 
     {% endfor %}
 {% endblock %}
