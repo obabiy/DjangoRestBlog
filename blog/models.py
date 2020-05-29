@@ -15,7 +15,7 @@ class Post(models.Model):
         return reverse('post_detail_url', kwargs={'slug': self.slug})   #додаємо метод, який визначає url з відповідим slug для кожного посту
 
     def __str__(self):                               #вказуєм форматування данних які будуть виводитись
-        return '{}'.format(self.title)
+        return self.title
 
 
 class Tag(models.Model):
@@ -23,7 +23,7 @@ class Tag(models.Model):
     slug = models.SlugField(max_length = 50, unique=True)
 
     def get_absolute_url(self):
-        return reverse('tag_detail_url', kwargs={'slug':self.slug})
+        return reverse('tag_detail_url', kwargs={'slug': self.slug})
 
     def __str__(self):
-        return'{}'.format(self.title)
+        return self.title

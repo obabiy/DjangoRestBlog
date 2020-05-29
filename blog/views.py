@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.views.generic import View
 
 from .models import Post, Tag
 from .utils import ObjectDetailMixin
+from .forms import TagForm
 
 # Create your views here.
 
@@ -25,14 +27,6 @@ class PostDetail(ObjectDetailMixin, View):
     #    post = get_object_or_404(Post, slug__iexact=slug)    #Додаємо вивід 404, якщо сторінки не існує. get_object_or_404(try catch)
     #    return render(request, 'blog/post_details.html', context={'post': post})
 
-def tags_list(request):
-    tags = Tag.objects.all()
-    return render(request, 'blog/tags_list.html', context={'tags': tags})
-
-# def tag_detail(request, slug):
-#     tag = Tag.objects.get(slug__iexact=slug)
-#     return render(request, 'blog/tag_detail.html', context={'tag': tag})
-
 class TagDetail(ObjectDetailMixin, View):
     model = Tag
     template = 'blog/tag_detail.html'
@@ -42,8 +36,25 @@ class TagDetail(ObjectDetailMixin, View):
     #     tag = get_object_or_404(Tag, slug__iexact=slug)
     #     return render(request, 'blog/tag_detail.html', context={'tag': tag})
 
+class TagCreate(View):
+    def get(self, request):
+        form = TagForm()
+        return render(request, 'blog/tag_create.html', context={'form': form})
 
+    def post(self, request):
+        bound_form = TagForm(request.POST)
 
+        if bound_form.is_valid():
+            new_tag = bound_form.save()
+            # return redirect(new_tag)
+        return render(request, 'blog/tag_create.html', context=({'form': bound_form}))
 
+def tags_list(request):
+    tags = Tag.objects.all()
+    return render(request, 'blog/tags_list.html', context={'tags': tags})
+
+# def tag_detail(request, slug):
+#     tag = Tag.objects.get(slug__iexact=slug)
+#     return render(request, 'blog/tag_detail.html', context={'tag': tag})
 
 
