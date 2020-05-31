@@ -9,6 +9,7 @@ from .models import Post, Tag
 from .utils import *
 from .forms import TagForm, PostForm
 
+
 # Create your views here.
 
 def posts_list(request):
@@ -53,7 +54,7 @@ class PostUpdate(ObjectUpdateMixin, View):
 class PostDelete(ObjectDeleteMixin, View):
     model = Post
     template = 'blog/post_delete_form.html'
-    redirect_url = 'posts_list_url'
+    redirect_url = 'posts _list_url'
 
 class TagDetail(ObjectDetailMixin, View):
     model = Tag

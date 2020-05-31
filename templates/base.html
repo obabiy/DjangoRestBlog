@@ -32,19 +32,39 @@
           <li class="nav-item ml-2">
             <a class="nav-link" href="{% url 'tags_list_url' %}">Tags</a>
           </li>
-
-          <li class="nav-item ml-5">
-           <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Create..
-                </a>
+            {% if request.user.is_authenticated %}
+            <li class="nav-item ml-5">
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Create..
+                    </a>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="{% url 'post_create_url' %}">Create Post</a>
                     <a class="dropdown-item" href="{% url 'tag_create_url' %}">Create Tag</a>
                 </div>
-            </div>
+                </div>
+            </li>
+            {% endif %}
+
+
+          <li class="nav-item">
+              {% if request.user.is_authenticated %}
+                    <a href="/admin" class="btn btn-light ml-5">Log Out</a>
+                {% endif %}
+                {% if not request.user.is_authenticated %}
+                    <a href="/admin" class="btn btn-light ml-5">Log In</a>
+                {% endif %}
           </li>
+            <li class="nav-item ml-5 mt-1">
+                {% if request.user.is_authenticated %}
+                    <h5 class="text-info">Is logged</h5>
+                {% endif %}
+                {% if not request.user.is_authenticated %}
+                    <h5 class="text-info">Isn't logged</h5>
+                {% endif %}
+            </li>
+
         </ul>
 <!--        <form class="form-inline my-2 my-lg-0">-->
 <!--          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
@@ -64,14 +84,15 @@
         </div>
     </div>
 
+    {% if request.user.is_authenticated %}
     <div class="admin-panel align-items-center">
         <a href="/admin" class="btn btn-outline-info">Admin</a>
-
         {% block admin-panel %}
 
         {% endblock %}
-
     </div>
+    {% endif %}
+
 
 </body>
 </html>
