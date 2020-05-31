@@ -9,6 +9,8 @@
     <form class="" action="{% url 'post_create_url' %}" method="post">
         {% csrf_token %}
 
+        <h2 class="mb-5">Create post</h2>
+
         {% for field in form %}
             <div class="form-group">
                 {% if field.errors %}
